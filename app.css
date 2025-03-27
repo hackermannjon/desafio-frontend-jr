@@ -13,10 +13,6 @@
   scrollbar-color: #e5e5ea transparent;
 }
 
-.calendar-grid::-webkit-scrollbar-button {
-  display: none;
-}
-
 .calendar-grid > * {
   border: 1px solid #f2f2f7;
   box-sizing: border-box;
