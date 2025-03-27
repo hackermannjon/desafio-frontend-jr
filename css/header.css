@@ -32,6 +32,15 @@
 .calendar-controls button:hover {
   background-color: #afafff;
 }
+.calendar-controls button:disabled {
+  img {
+    display: none;
+  }
+  &:hover {
+    background-color: #f2f2f7;
+  }
+  cursor: default;
+}
 
 .calendar-controls img {
   width: 24px;
@@ -53,5 +62,5 @@
 }
 
 .calendar-controls div:hover {
-  background-color: #afafff;
+  color: #afafff;
 }

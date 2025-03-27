@@ -1,4 +1,4 @@
-const fetchEvents = async () => {
+export const fetchEvents = async () => {
   try {
     const response = await fetch("eventos.json");
     const data = await response.json();
