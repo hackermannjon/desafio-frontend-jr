@@ -45,6 +45,7 @@
 .calendar-controls img {
   width: 24px;
   height: 24px;
+  opacity: 0.5;
 }
 
 .calendar-controls div {
