@@ -103,3 +103,36 @@ export const truncateText = (text, limitPerRow, numberOfRows) => {
   }
   return result;
 };
+
+export function groupConflictingEvents(events) {
+  const sorted = [...events].sort(
+    (a, b) => new Date(a.data_inicio) - new Date(b.data_inicio)
+  );
+  const groups = [];
+  let currentGroup = [];
+  let currentMaxEnd = null;
+
+  for (const event of sorted) {
+    const start = new Date(event.data_inicio);
+    const end = new Date(event.data_fim);
+    if (currentGroup.length === 0) {
+      currentGroup.push(event);
+      currentMaxEnd = end;
+    } else {
+      if (start < currentMaxEnd) {
+        currentGroup.push(event);
+        if (end > currentMaxEnd) {
+          currentMaxEnd = end;
+        }
+      } else {
+        groups.push(currentGroup);
+        currentGroup = [event];
+        currentMaxEnd = end;
+      }
+    }
+  }
+  if (currentGroup.length) {
+    groups.push(currentGroup);
+  }
+  return groups;
+}

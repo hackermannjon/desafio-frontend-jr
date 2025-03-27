@@ -1,4 +1,8 @@
-import { hexToRgb, truncateText } from "../../../utils/helpers.js";
+import {
+  groupConflictingEvents,
+  hexToRgb,
+  truncateText,
+} from "../../../utils/helpers.js";
 
 export const createEventBubble = (
   nome,
@@ -81,12 +85,14 @@ export const renderEventColumns = (mappedEvents, weekDates) => {
     const eventsForDay = mappedEvents[dayKey] || [];
     const baseLeft = 133 + dayIndex * 173;
 
-    if (eventsForDay.length === 2) {
-      const firstEnd = new Date(eventsForDay[0].data_fim);
-      const secondStart = new Date(eventsForDay[1].data_inicio);
-      if (secondStart < firstEnd) {
-        const conflictedBubbleWidth = (141 - 16) / 2;
-        eventsForDay.forEach((event, index) => {
+    const conflictGroups = groupConflictingEvents(eventsForDay);
+
+    conflictGroups.forEach((group) => {
+      if (group.length > 1) {
+        const gap = 16;
+        const conflictedBubbleWidth =
+          (141 - gap * (group.length - 1)) / group.length;
+        group.forEach((event, index) => {
           const bubble = createEventBubble(
             event.nome,
             event.data_inicio,
@@ -96,24 +102,22 @@ export const renderEventColumns = (mappedEvents, weekDates) => {
           );
           bubble.style.width = `${conflictedBubbleWidth}px`;
           bubble.dataset.initialWidth = conflictedBubbleWidth;
-          const left =
-            index === 0 ? baseLeft : baseLeft + conflictedBubbleWidth + 16;
+          const left = baseLeft + index * (conflictedBubbleWidth + gap);
           bubble.style.left = `${left}px`;
           grid.appendChild(bubble);
         });
-        return;
+      } else {
+        group.forEach((event) => {
+          const bubble = createEventBubble(
+            event.nome,
+            event.data_inicio,
+            event.data_fim,
+            event.cor
+          );
+          bubble.style.left = `${baseLeft}px`;
+          grid.appendChild(bubble);
+        });
       }
-    }
-
-    eventsForDay.forEach((event) => {
-      const bubble = createEventBubble(
-        event.nome,
-        event.data_inicio,
-        event.data_fim,
-        event.cor
-      );
-      bubble.style.left = `${baseLeft}px`;
-      grid.appendChild(bubble);
     });
   });
 };
