@@ -3,10 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/header.css" />
   </head>
-  <body>
-    <div id="root"></div>
-    <script src="index.js"></script>
+
+  <body class="body">
+    <div class="calendar-container">
+      <header class="calendar-nav">
+        <div class="calendar-title">Calendar</div>
+        <div class="calendar-controls">
+          <button id="prev-btn" aria-label="Semana anterior">
+            <img src="assets/leftArrow.svg" alt="Seta para esquerda" />
+          </button>
+          <div class="week-div" id="today-btn">Today</div>
+          <button id="next-btn" aria-label="Próxima semana">
+            <img src="assets/rightArrow.svg" alt="Seta para direita" />
+          </button>
+        </div>
+      </header>
+    </div>
   </body>
 </html>
