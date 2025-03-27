@@ -61,5 +61,8 @@ export const updateHeader = ({ weekDates }) => {
     } else {
       cell.classList.remove("today");
     }
+    cell.style.animation = "none";
+    void cell.offsetWidth;
+    cell.style.animation = "headerIn 0.8s ease forwards";
   }
 };
