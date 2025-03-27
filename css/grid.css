@@ -1,0 +1,57 @@
+.calendar-grid {
+  display: grid;
+  grid-template-columns: 133px repeat(7, 173px);
+  grid-template-rows: 128px repeat(11, 64px);
+  overflow-y: auto;
+  max-height: 640px;
+  background-color: #ffffff;
+  overflow-x: hidden;
+}
+
+.calendar-grid > * {
+  border: 1px solid #f2f2f7;
+  box-sizing: border-box;
+}
+
+.corner-cell {
+  background-color: #ffffff;
+}
+
+.day-header-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background-color: #ffffff;
+  height: 128px;
+}
+.day-header-cell p {
+  color: rgba(0, 0, 0, 35%);
+  font-size: 20px;
+}
+
+.hour-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 24px; /* Aumentado de 12px para 24px */
+  font-size: 16px;
+  color: #7f7f7f;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.hour-wrapper {
+  position: absolute;
+  text-align: end;
+  top: -10px;
+  right: 16px;
+  background-color: #ffffff;
+  padding: 0 8px;
+  width: 96px;
+}
+
+.day-column {
+  background-color: #ffffff;
+}

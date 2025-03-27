@@ -5,6 +5,7 @@ body {
   height: 100vh;
   margin: 0;
   background-color: #f2f2f7;
+  font-family: "Inter", sans-serif;
 }
 
 .calendar-container {
@@ -12,4 +13,5 @@ body {
   height: 700px;
   border-radius: 32px;
   background-color: rgb(255, 255, 255);
+  position: relative;
 }
