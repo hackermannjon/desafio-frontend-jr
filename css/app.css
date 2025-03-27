@@ -6,6 +6,10 @@
   max-height: 640px;
   background-color: #ffffff;
   overflow-x: hidden;
+  border-radius: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  scrollbar-width: 16px;
+  scrollbar-color: #e5e5ea transparent;
 }
 
 .calendar-grid > * {

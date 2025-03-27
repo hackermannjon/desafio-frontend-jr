@@ -11,7 +11,7 @@ body {
 .calendar-container {
   width: 1344px;
   height: 700px;
-  border-radius: 32px;
+  border-radius: 40px;
   background-color: rgb(255, 255, 255);
   position: relative;
 }
