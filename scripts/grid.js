@@ -1,10 +1,35 @@
 const calendarContainer = document.querySelector(".calendar-container");
-
 const gridContainer = document.createElement("div");
 gridContainer.className = "calendar-grid";
 calendarContainer.appendChild(gridContainer);
 
 const days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+const today = new Date();
+const currentDayOfWeek = today.getDay();
+const sunday = new Date(today);
+sunday.setDate(today.getDate() - currentDayOfWeek);
+
+const weekDates = [];
+for (let i = 0; i < 7; i++) {
+  const d = new Date(sunday);
+  d.setDate(sunday.getDate() + i);
+  weekDates.push(d);
+}
+
+const monthNames = [
+  "Jan",
+  "Fev",
+  "Mar",
+  "Abr",
+  "Mai",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Set",
+  "Out",
+  "Nov",
+  "Dez",
+];
 const totalCols = 1 + days.length;
 
 for (let col = 0; col < totalCols; col++) {
@@ -14,9 +39,28 @@ for (let col = 0; col < totalCols; col++) {
     cell.textContent = "";
   } else {
     cell.className = "day-header-cell";
-    const dayTitle = document.createElement("p");
-    dayTitle.textContent = days[col - 1];
-    cell.appendChild(dayTitle);
+    const index = col - 1;
+    const dateObj = weekDates[index];
+
+    const monthDiv = document.createElement("div");
+    monthDiv.className = "day-month";
+    monthDiv.textContent = monthNames[dateObj.getMonth()];
+
+    const dateDiv = document.createElement("div");
+    dateDiv.className = "day-date";
+    dateDiv.textContent = dateObj.getDate();
+
+    const dayP = document.createElement("p");
+    dayP.className = "day-abbr";
+    dayP.textContent = days[dateObj.getDay()];
+
+    if (dateObj.toDateString() === today.toDateString()) {
+      cell.classList.add("today");
+    }
+
+    cell.appendChild(monthDiv);
+    cell.appendChild(dateDiv);
+    cell.appendChild(dayP);
   }
   gridContainer.appendChild(cell);
 }

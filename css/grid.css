@@ -25,10 +25,26 @@
   font-weight: 600;
   background-color: #ffffff;
   height: 128px;
+  gap: 5px;
 }
-.day-header-cell p {
-  color: rgba(0, 0, 0, 35%);
+
+.day-month {
   font-size: 20px;
+  font-weight: 500;
+}
+
+.day-date {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.day-header-cell p {
+  opacity: 0.35;
+  font-size: 20px;
+  margin: 0%;
+}
+.day-header-cell.today {
+  color: #5856d6;
 }
 
 .hour-cell {
