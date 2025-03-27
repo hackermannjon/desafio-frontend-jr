@@ -4,12 +4,7 @@ import { createStyledElement, initializeWeekDates } from "../utils/helpers.js";
 const today = new Date();
 const weekDates = initializeWeekDates();
 
-const calendarContainer = document.querySelector(".calendar-container");
-const gridContainer = createStyledElement({
-  tag: "div",
-  className: "calendar-grid",
-});
-calendarContainer.appendChild(gridContainer);
+const gridContainer = document.querySelector(".calendar-grid");
 
 const createHeader = () => {
   for (let col = 0; col < 1 + days.length; col++) {
