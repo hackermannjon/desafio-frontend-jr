@@ -1,33 +1,4 @@
-import { hexToRgb } from "../utils/helpers.js";
-
-function truncateText(text, limitPerRow, numberOfRows) {
-  const maxChars = limitPerRow * numberOfRows;
-  const words = text.split(" ");
-  let result = "";
-
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
-    if (result === "") {
-      if (word.length > limitPerRow) {
-        return word.slice(0, limitPerRow - 3) + "...";
-      } else {
-        result = word;
-      }
-    } else {
-      const test = result + " " + word;
-      if (test.length > maxChars) {
-        return result.trim() + "...";
-      }
-      if (word.length > limitPerRow) {
-        const truncatedWord = word.slice(0, limitPerRow - 3) + "...";
-        result += " " + truncatedWord;
-        return result.trim();
-      }
-      result = test;
-    }
-  }
-  return result;
-}
+import { hexToRgb, truncateText } from "../utils/helpers.js";
 
 export const createEventBubble = (
   nome,
@@ -77,15 +48,24 @@ export const createEventBubble = (
   bubble.dataset.fullText = nome;
   bubble.dataset.charLimit = limitPerRow * NumberOfRows;
 
+  const initialWidth = bubbleWidth ? bubbleWidth : bubble.offsetWidth || 141;
+  bubble.dataset.initialWidth = initialWidth;
+
   bubble.addEventListener("mouseenter", () => {
     p.textContent = bubble.dataset.fullText;
+    bubble.style.width = "141px";
+    const initialHeight =
+      parseFloat(bubble.dataset.initialHeight) || bubbleHeight;
+    const requiredHeight = bubble.scrollHeight;
+    bubble.style.height = Math.max(requiredHeight, initialHeight) + "px";
+    bubble.style.zIndex = "1000";
   });
+
   bubble.addEventListener("mouseleave", () => {
-    p.textContent = truncateText(
-      bubble.dataset.fullText,
-      limitPerRow,
-      NumberOfRows
-    );
+    p.textContent = truncateText(nome, limitPerRow, NumberOfRows);
+    bubble.style.width = `${bubble.dataset.initialWidth}px`;
+    bubble.style.height = `${bubbleHeight}px`;
+    bubble.style.zIndex = "0";
   });
 
   return bubble;
@@ -115,15 +95,16 @@ export const renderEventColumns = (mappedEvents, weekDates) => {
             true
           );
           bubble.style.width = `${conflictedBubbleWidth}px`;
+          bubble.dataset.initialWidth = conflictedBubbleWidth;
           const left =
-            index === 0 ? baseLeft : baseLeft + conflictedBubbleWidth + 16; // gap de 16px
+            index === 0 ? baseLeft : baseLeft + conflictedBubbleWidth + 16;
           bubble.style.left = `${left}px`;
           grid.appendChild(bubble);
         });
         return;
       }
     }
-    // Renderização normal para os demais casos
+
     eventsForDay.forEach((event) => {
       const bubble = createEventBubble(
         event.nome,

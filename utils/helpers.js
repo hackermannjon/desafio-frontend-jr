@@ -74,3 +74,32 @@ export const hexToRgb = (hex) => {
   const b = bigint & 255;
   return { r, g, b };
 };
+
+export const truncateText = (text, limitPerRow, numberOfRows) => {
+  const maxChars = limitPerRow * numberOfRows;
+  const words = text.split(" ");
+  let result = "";
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    if (result === "") {
+      if (word.length > limitPerRow) {
+        return word.slice(0, limitPerRow - 3) + "...";
+      } else {
+        result = word;
+      }
+    } else {
+      const test = result + " " + word;
+      if (test.length > maxChars) {
+        return result.trim() + "...";
+      }
+      if (word.length > limitPerRow) {
+        const truncatedWord = word.slice(0, limitPerRow - 3) + "...";
+        result += " " + truncatedWord;
+        return result.trim();
+      }
+      result = test;
+    }
+  }
+  return result;
+};

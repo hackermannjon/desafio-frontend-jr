@@ -1,6 +1,5 @@
 .event-bubble {
   position: absolute;
-  width: 141px;
   border-radius: 16px;
   display: flex;
   align-items: flex-start;
