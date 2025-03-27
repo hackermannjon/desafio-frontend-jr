@@ -1,4 +1,4 @@
-import { hexToRgb, truncateText } from "../utils/helpers.js";
+import { hexToRgb, truncateText } from "../../../utils/helpers.js";
 
 export const createEventBubble = (
   nome,
