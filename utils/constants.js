@@ -1,18 +1,18 @@
-export const days = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+export const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 export const monthNames = [
   "Jan",
-  "Fev",
+  "Feb",
   "Mar",
-  "Abr",
-  "Mai",
+  "Apr",
+  "May",
   "Jun",
   "Jul",
-  "Ago",
-  "Set",
-  "Out",
+  "Aug",
+  "Sep",
+  "Oct",
   "Nov",
-  "Dez",
+  "Dec",
 ];
 
 export const timeSlots = Array.from({ length: 24 }, (_, i) => {
