@@ -1,4 +1,5 @@
 .calendar-grid {
+  position: relative;
   display: grid;
   grid-template-columns: 133px repeat(7, 173px);
   grid-template-rows: 128px repeat(24, 64px);

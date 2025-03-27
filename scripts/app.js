@@ -6,12 +6,14 @@ import {
   getWeekStart,
   mapEventsByDay,
 } from "../utils/helpers.js";
+import { renderEventColumns } from "./eventBubble.js";
 
 const gridContainer = document.querySelector(".calendar-grid");
 
 const today = new Date();
 let events = await fetchEvents();
 const mappedEvents = mapEventsByDay(events.eventos);
+console.log(mappedEvents);
 const mappedEventKeys = Object.keys(mappedEvents);
 let currentWeekStart = getWeekStart(today);
 let weekDates = getWeekDates(currentWeekStart);
@@ -138,6 +140,8 @@ const buttonListeners = () => {
       currentWeekStart = nextWeek;
       updateHeader();
       updateNavButtons();
+      weekDates = getWeekDates(currentWeekStart);
+      renderEventColumns(mappedEvents, weekDates);
     }
   });
 
@@ -148,6 +152,8 @@ const buttonListeners = () => {
       currentWeekStart = prevWeek;
       updateHeader();
       updateNavButtons();
+      weekDates = getWeekDates(currentWeekStart);
+      renderEventColumns(mappedEvents, weekDates);
     }
   });
 
@@ -155,9 +161,12 @@ const buttonListeners = () => {
     currentWeekStart = getWeekStart(today);
     updateHeader();
     updateNavButtons();
+    weekDates = getWeekDates(currentWeekStart);
+    renderEventColumns(mappedEvents, weekDates);
   });
 };
 
 createHeader();
 createCalendar();
 buttonListeners();
+renderEventColumns(mappedEvents, weekDates);
