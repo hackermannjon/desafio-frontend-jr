@@ -10,6 +10,11 @@
   font-weight: bold;
   color: #000;
   margin: 40px 48px;
+
+  @media screen and (max-width: 1240px) {
+    font-size: 32px;
+    margin: 32px 24px;
+  }
 }
 
 .calendar-controls {
@@ -27,6 +32,11 @@
   cursor: pointer;
   background-color: #f2f2f7;
   border: none;
+
+  @media screen and (max-width: 1240px) {
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .calendar-controls button:hover {
@@ -46,6 +56,11 @@
   width: 24px;
   height: 24px;
   opacity: 0.5;
+
+  @media screen and (max-width: 1240px) {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .calendar-controls div {
@@ -60,6 +75,12 @@
   background-color: #f2f2f7;
   color: #7f7f7f;
   font-size: 24px;
+
+  @media screen and (max-width: 1240px) {
+    width: 96px;
+    height: 48px;
+    font-size: 20px;
+  }
 }
 
 .calendar-controls div:hover {
@@ -69,11 +90,19 @@
 .month {
   font-size: 20px;
   font-weight: 500;
+
+  @media screen and (max-width: 1240px) {
+    font-size: 16px;
+  }
 }
 
 .date {
   font-size: 32px;
   font-weight: 600;
+
+  @media screen and (max-width: 1240px) {
+    font-size: 24px;
+  }
 }
 .day-header-cell {
   display: flex;
@@ -102,6 +131,10 @@
   opacity: 0.35;
   font-size: 20px;
   margin: 0%;
+
+  @media screen and (max-width: 1240px) {
+    font-size: 16px;
+  }
 }
 .day-header-cell.today {
   color: #5856d6;

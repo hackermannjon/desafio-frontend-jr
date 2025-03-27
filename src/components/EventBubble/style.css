@@ -31,6 +31,10 @@
   margin: 0;
   padding: 6px;
   text-align: left;
+
+  @media screen and (max-width: 1240px) {
+    font-size: 12px;
+  }
 }
 
 .event-bubble:hover {
