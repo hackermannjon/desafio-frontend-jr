@@ -2,7 +2,7 @@ import { fetchEvents } from "./services/events.js";
 import { createCalendar } from "./src/components/CalendarGrid/index.js";
 import { renderEventColumns } from "./src/components/EventBubble/index.js";
 import { createHeader, updateHeader } from "./src/components/Header/index.js";
-import { RenderTimeIndicator } from "./src/components/TimeIndicator/index.js";
+import { TimeIndicator } from "./src/components/TimeIndicator/index.js";
 import { getWeekDates, getWeekStart, mapEventsByDay } from "./utils/helpers.js";
 
 const today = new Date();
@@ -63,7 +63,7 @@ const updateComponents = () => {
   updateHeader({ weekDates });
   updateNavButtons();
   renderEventColumns(mappedEvents, weekDates);
-  RenderTimeIndicator({ weekDates });
+  TimeIndicator({ weekDates });
 };
 
 createHeader({ weekDates });
