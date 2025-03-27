@@ -1,11 +1,32 @@
 import { hexToRgb } from "../utils/helpers.js";
 
-function truncateText(text, limitPerRow, NumberOfRows) {
-  const maxChars = limitPerRow * NumberOfRows;
-  if (text.length > maxChars) {
-    return text.slice(0, maxChars - 3) + "...";
+function truncateText(text, limitPerRow, numberOfRows) {
+  const maxChars = limitPerRow * numberOfRows;
+  const words = text.split(" ");
+  let result = "";
+
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    if (result === "") {
+      if (word.length > limitPerRow) {
+        return word.slice(0, limitPerRow - 3) + "...";
+      } else {
+        result = word;
+      }
+    } else {
+      const test = result + " " + word;
+      if (test.length > maxChars) {
+        return result.trim() + "...";
+      }
+      if (word.length > limitPerRow) {
+        const truncatedWord = word.slice(0, limitPerRow - 3) + "...";
+        result += " " + truncatedWord;
+        return result.trim();
+      }
+      result = test;
+    }
   }
-  return text;
+  return result;
 }
 
 export const createEventBubble = (
@@ -54,7 +75,7 @@ export const createEventBubble = (
 
   p.textContent = truncateText(nome, limitPerRow, NumberOfRows);
   bubble.dataset.fullText = nome;
-  bubble.dataset.charLimit = limit;
+  bubble.dataset.charLimit = limitPerRow * NumberOfRows;
 
   bubble.addEventListener("mouseenter", () => {
     p.textContent = bubble.dataset.fullText;
