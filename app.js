@@ -51,7 +51,11 @@ const buttonListeners = () => {
     currentWeekStart = getWeekStart(today);
     weekDates = getWeekDates(currentWeekStart);
 
-    updateComponents();
+    const grid = document.querySelector(".calendar-grid");
+    grid.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => {
+      updateComponents();
+    }, 300);
   });
 };
 
