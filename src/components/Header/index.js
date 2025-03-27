@@ -3,40 +3,21 @@ import { createStyledElement } from "../../../utils/helpers.js";
 
 const gridContainer = document.querySelector(".calendar-grid");
 
-export const createHeader = ({ weekDates }) => {
-  const today = new Date();
-
-  for (let col = 0; col < 1 + days.length; col++) {
+export const createHeader = () => {
+  const totalCols = 1 + days.length;
+  for (let col = 0; col < totalCols; col++) {
     const cell = document.createElement("div");
     if (col === 0) {
       cell.className = "corner-cell";
       cell.textContent = "";
     } else {
       cell.className = "day-header-cell";
-      const index = col - 1;
-      const dateObj = weekDates[index];
-
-      const monthDiv = createStyledElement({
-        tag: "div",
-        className: "month",
-        textContent: monthNames[dateObj.getMonth()],
-      });
-
-      const dateDiv = createStyledElement({
-        tag: "div",
-        className: "date",
-        textContent: dateObj.getDate(),
-      });
-
-      const dayP = createStyledElement({
-        tag: "p",
-        className: "day",
-        textContent: days[dateObj.getDay()],
-      });
-
-      if (dateObj.toDateString() === today.toDateString()) {
-        cell.classList.add("today");
-      }
+      const monthDiv = document.createElement("div");
+      monthDiv.className = "month";
+      const dateDiv = document.createElement("div");
+      dateDiv.className = "date";
+      const dayP = document.createElement("p");
+      dayP.className = "day";
 
       cell.appendChild(monthDiv);
       cell.appendChild(dateDiv);

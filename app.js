@@ -2,6 +2,7 @@ import { fetchEvents } from "./services/events.js";
 import { createCalendar } from "./src/components/CalendarGrid/index.js";
 import { renderEventColumns } from "./src/components/EventBubble/index.js";
 import { createHeader, updateHeader } from "./src/components/Header/index.js";
+import { RenderTimeIndicator } from "./src/components/TimeIndicator/index.js";
 import { getWeekDates, getWeekStart, mapEventsByDay } from "./utils/helpers.js";
 
 const today = new Date();
@@ -31,9 +32,8 @@ const buttonListeners = () => {
     if (!latestDate || nextWeek <= getWeekStart(latestDate)) {
       currentWeekStart = nextWeek;
       weekDates = getWeekDates(currentWeekStart);
-      updateHeader({ weekDates });
-      updateNavButtons();
-      renderEventColumns(mappedEvents, weekDates);
+
+      updateComponents();
     }
   });
 
@@ -43,22 +43,26 @@ const buttonListeners = () => {
     if (!earliestDate || prevWeek >= getWeekStart(earliestDate)) {
       currentWeekStart = prevWeek;
       weekDates = getWeekDates(currentWeekStart);
-      updateHeader({ weekDates });
-      updateNavButtons();
-      renderEventColumns(mappedEvents, weekDates);
+      updateComponents();
     }
   });
 
   document.getElementById("today-btn").addEventListener("click", () => {
     currentWeekStart = getWeekStart(today);
     weekDates = getWeekDates(currentWeekStart);
-    updateHeader({ weekDates });
-    updateNavButtons();
-    renderEventColumns(mappedEvents, weekDates);
+
+    updateComponents();
   });
+};
+
+const updateComponents = () => {
+  updateHeader({ weekDates });
+  updateNavButtons();
+  renderEventColumns(mappedEvents, weekDates);
+  RenderTimeIndicator({ weekDates });
 };
 
 createHeader({ weekDates });
 createCalendar();
 buttonListeners();
-renderEventColumns(mappedEvents, weekDates);
+updateComponents();
