@@ -6,15 +6,22 @@
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  font-size: 14px;
-  font-weight: 500;
-
-  padding: 6px 6px;
-  color: rgba(127, 127, 127, 0.5);
   background-color: var(--base-color);
 }
 
+.event-bubble p {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(127, 127, 127, 0.5);
+  margin: 0;
+  padding: 6px;
+  text-align: left;
+}
+
 .event-bubble:hover {
-  color: #1d1d1b;
   background-color: var(--hover-color);
+}
+
+.event-bubble:hover p {
+  color: #1d1d1b;
 }
