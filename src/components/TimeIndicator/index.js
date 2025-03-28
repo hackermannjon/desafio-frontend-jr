@@ -64,6 +64,5 @@ export const TimeIndicator = ({ weekDates }) => {
   RenderTimeIndicator({ weekDates });
   setInterval(() => {
     RenderTimeIndicator({ weekDates });
-  }, 10000);
-  return null;
+  }, 30000);
 };

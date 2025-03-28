@@ -30,9 +30,6 @@ export const createHeader = () => {
 export const updateHeader = ({ weekDates }) => {
   const today = new Date();
   const totalCols = 1 + days.length;
-  // Remova a linha abaixo que redefinia o currentWeekStart e weekDates!
-  // let currentWeekStart = getWeekStart(today);
-  // weekDates = getWeekDates(currentWeekStart);
 
   for (let col = 1; col < totalCols; col++) {
     const cell = gridContainer.children[col];

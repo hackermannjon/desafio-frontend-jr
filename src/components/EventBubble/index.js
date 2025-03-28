@@ -58,10 +58,12 @@ export const createEventBubble = (
   bubble.addEventListener("mouseenter", () => {
     p.textContent = bubble.dataset.fullText;
     bubble.style.width = "141px";
+
     const initialHeight =
       parseFloat(bubble.dataset.initialHeight) || bubbleHeight;
     const requiredHeight = bubble.scrollHeight;
     bubble.style.height = Math.max(requiredHeight, initialHeight) + "px";
+
     bubble.style.zIndex = "1000";
   });
 
