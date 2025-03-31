@@ -1,7 +1,11 @@
 import { fetchEvents } from "./services/events.js";
 import { createCalendar } from "./src/components/CalendarGrid/index.js";
 import { renderEventColumns } from "./src/components/EventBubble/index.js";
-import { createHeader, updateHeader } from "./src/components/Header/index.js";
+import {
+  createHeader,
+  createSelect,
+  updateHeader,
+} from "./src/components/Header/index.js";
 import { TimeIndicator } from "./src/components/TimeIndicator/index.js";
 import { getWeekDates, getWeekStart, mapEventsByDay } from "./utils/helpers.js";
 
@@ -47,6 +51,27 @@ const buttonListeners = () => {
     }
   });
 
+  document.getElementById("next-year-btn").addEventListener("click", () => {
+    const nextWeek = new Date(currentWeekStart);
+    nextWeek.setDate(currentWeekStart.getDate() + 365);
+    console.log(nextWeek);
+    currentWeekStart = nextWeek;
+    weekDates = getWeekDates(currentWeekStart);
+
+    updateComponents();
+  });
+
+  document.getElementById("last-year-btn").addEventListener("click", () => {
+    const prevWeek = new Date(currentWeekStart);
+    prevWeek.setDate(currentWeekStart.getDate() - 365);
+    console.log(prevWeek);
+
+    currentWeekStart = prevWeek;
+
+    weekDates = getWeekDates(currentWeekStart);
+    updateComponents();
+  });
+
   document.getElementById("today-btn").addEventListener("click", () => {
     currentWeekStart = getWeekStart(today);
     weekDates = getWeekDates(currentWeekStart);
@@ -59,7 +84,8 @@ const buttonListeners = () => {
   });
 };
 
-const updateComponents = () => {
+export const updateComponents = ({ weekByMonth } = {}) => {
+  weekDates = weekByMonth ?? weekDates;
   updateHeader({ weekDates });
   updateNavButtons();
   renderEventColumns(mappedEvents, weekDates);
@@ -70,3 +96,4 @@ createHeader({ weekDates });
 createCalendar();
 buttonListeners();
 updateComponents();
+createSelect({ weekDates, currentWeekStart });

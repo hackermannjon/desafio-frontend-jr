@@ -39,6 +39,35 @@
   }
 }
 
+.calendar-controls p {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 500;
+  color: #7f7f7f;
+}
+
+.calendar-nav select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 64px;
+  border-radius: 12px;
+  margin: 0 16px;
+  cursor: pointer;
+  background-color: #f2f2f7;
+  color: #7f7f7f;
+  font-size: 24px;
+  text-align: center;
+  font-size: xx-large;
+
+  @media screen and (max-width: 1240px) {
+    width: 96px;
+    height: 48px;
+    font-size: 20px;
+  }
+}
+
 .calendar-controls button:hover {
   background-color: #afafff;
 }

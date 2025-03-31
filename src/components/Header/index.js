@@ -1,5 +1,6 @@
+import { updateComponents } from "../../../app.js";
 import { days, monthNames } from "../../../utils/constants.js";
-import { createStyledElement } from "../../../utils/helpers.js";
+import { createStyledElement, getWeekDates } from "../../../utils/helpers.js";
 
 const gridContainer = document.querySelector(".calendar-grid");
 
@@ -25,6 +26,36 @@ export const createHeader = () => {
     }
     gridContainer.appendChild(cell);
   }
+};
+
+export const createSelect = ({ weekDates, currentWeekStart }) => {
+  const headerContainer = document.querySelector(".calendar-nav");
+  const selectContainer = createStyledElement({
+    tag: "select",
+    className: "select",
+    textContent: "",
+  });
+  selectContainer.id = "select";
+
+  for (let i = 0; i < monthNames.length; i++) {
+    const monthDiv = createStyledElement({
+      tag: "option",
+      className: "month",
+      textContent: monthNames[i],
+    });
+    monthDiv.id = i;
+    selectContainer.appendChild(monthDiv);
+  }
+
+  headerContainer.appendChild(selectContainer);
+
+  document.getElementById("select").addEventListener("change", (e) => {
+    const index = monthNames.indexOf(e.target.value);
+    const prevWeek = new Date(currentWeekStart);
+    prevWeek.setMonth(index - 1);
+    weekDates = getWeekDates(prevWeek);
+    updateComponents({ weekByMonth: weekDates });
+  });
 };
 
 export const updateHeader = ({ weekDates }) => {
